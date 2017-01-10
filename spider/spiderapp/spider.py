@@ -15,15 +15,6 @@ def download_page(request):
         return urls
 
 
-
-
-
-
-
-
-
-
-
 def get_url_text(request):
     urls=download_page(request)
     if urls:
