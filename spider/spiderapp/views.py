@@ -21,7 +21,7 @@ def regist(request):
             username = uf.cleaned_data['username']
             password = uf.cleaned_data['password']
             User.objects.create(username=username,password=password)
-            return HttpResponse('regist succees!!')
+            return HttpResponseRedirect('/spiderapp/index/',)
     else:
         uf = UserForm()
         #print RequestContext(request)
@@ -40,10 +40,10 @@ def login(request):
             user = User.objects.filter(username__exact = username,password__exact = password)
             if user:
                 #比较成功,挑转index
-                response = HttpResponseRedirect('spider/index')
+                response = HttpResponseRedirect('/spiderapp/index')
                 #将username写入cookie,失效时间为3600
                 response.set_cookie('username',username,3600)
-                return response()
+                return response
             else:
                 #比较失败还在login
                 return HttpResponseRedirect('')
@@ -54,11 +54,15 @@ def login(request):
 #登陆成功
 def index(request):
     username = request.COOKIES.get('username','')
-    return render_to_response('index.html',{'username':username},context_instance=RequestContext(request))
+    print len(username)
+    if len(username)!= 0:
+        return render_to_response('index.html',{'username':username},context_instance=RequestContext(request))
+    else:
+        return HttpResponseRedirect('/')
 
 #退出
 def logout(request):
-    response = HttpResponse('logout!!')
+    response = HttpResponseRedirect('/')
     #清理cookie里保存的username
     response.delete_cookie('username')
     return response

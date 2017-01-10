@@ -10,11 +10,25 @@ def download_page(request):
     if 'MSG' in request.POST and request.POST['MSG']:
         msg = request.POST['MSG']
         urls = msg.split()
+        return urls
+    else:
+        return urls
+
+
+
+
+
+
+
+
+
+
+
+def get_url_text(request):
+    urls=download_page(request)
+    if urls:
         return render_to_response('result.html',{"urls":urls},context_instance=RequestContext(request))
     else:
-        pass
-    return HttpResponse(" no url")
-
-
-def get_url_text(url):
-    pass
+        return HttpResponse(" no url please return and put in agin")
+        
+    

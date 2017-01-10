@@ -9,10 +9,10 @@
 <body>
 <h1>welcome {{username}} !</h1>
 <br>
-<form method="POST" action="/spiderapp/download_page/">{% csrf_token %}
+<form method="POST" action="/spiderapp/get_url_text/">{% csrf_token %}
 <div>
+<p>请输入需要爬取的完整的url（例如http://www.dj.com）</p>
 <textarea name="MSG" cols=40 rows=4>
-请输入需要爬取的完整的url（例如http://www.dj.com）
 </textarea>
 </div>
 <input type="submit" value="提交">
