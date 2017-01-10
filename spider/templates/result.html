@@ -1,0 +1,12 @@
+{% if urls %}    
+<p>需要爬取的urls：</p>    
+<ul>
+{% for url in urls %}        
+<li>
+{{ url }}
+</li>        
+{% endfor %}    
+</ul>
+{% else %}    
+<p>No urls could be found.</p>
+{% endif %}
